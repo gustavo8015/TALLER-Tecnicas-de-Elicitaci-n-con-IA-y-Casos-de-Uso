@@ -13,6 +13,10 @@ https://gustavo8015.github.io/TALLER-Tecnicas-de-Elicitaci-n-con-IA-y-Casos-de-U
 
 Toque los botones o las tarjetas para recorrer el flujo de inscripción del estudiante: inicio de sesión, búsqueda, detalle, confirmación y horas.
 
+## Entrevista simulada asistida por IA
+
+Antes del análisis se hizo una entrevista con MS Copilot, que actuó como director de una ONG poco tecnológico y preocupado por la privacidad de los datos de sus beneficiarios. La carpeta [`entrevista-ia/`](entrevista-ia/README.md) contiene el prompt, la transcripción de las 8 preguntas con sus capturas de pantalla y el **Entregable 2**: los hallazgos clasificados en Requisitos de Usuario, Requisitos Funcionales y Restricciones (No Funcionales).
+
 ## Contenido
 
 | # | Artefacto | Fase | Código fuente | Imagen |
@@ -29,6 +33,7 @@ Toque los botones o las tarjetas para recorrer el flujo de inscripción del estu
 
 ```
 voluntariado-connect/
+├── entrevista-ia/              prompt, transcripción, capturas y Entregable 2
 ├── fase-1-descubrimiento/
 │   ├── arbol-descomposicion/   árbol funcional (Graphviz)
 │   ├── casos-de-uso/           casos de uso por épica (PlantUML)
