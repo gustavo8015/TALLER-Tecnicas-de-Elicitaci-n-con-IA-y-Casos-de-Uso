@@ -1,0 +1,14 @@
+digraph G { rankdir=TB; nodesep=0.7; ranksep=0.9; fontname="Helvetica";
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, fontcolor="white", penwidth=0, margin="0.25,0.15"];
+edge [fontname="Helvetica", fontsize=9, color="#555555", fontcolor="#333333"];
+est [label=<<b>Estudiante voluntario</b><br/><font point-size="9">[Persona]</font><br/><font point-size="9">Busca actividades, se inscribe,<br/>consulta horas y descarga certificados</font>>, fillcolor="#08427B"];
+ong [label=<<b>Coordinador de la ONG</b><br/><font point-size="9">[Persona]</font><br/><font point-size="9">Publica actividades, registra<br/>asistencia y aprueba horas</font>>, fillcolor="#08427B"];
+adm [label=<<b>Administrador universitario</b><br/><font point-size="9">[Persona]</font><br/><font point-size="9">Valida fundaciones y<br/>consulta reportes</font>>, fillcolor="#08427B"];
+sis [label=<<b>Voluntariado Connect</b><br/><font point-size="9">[Sistema de software]</font><br/><font point-size="9">Gestiona perfiles, actividades,<br/>inscripciones, horas y certificados</font>>, fillcolor="#1168BD", fontsize=13];
+idp [label=<<b>Microsoft Entra ID</b><br/><font point-size="9">[Sistema externo: cuentas institucionales]</font><br/><font point-size="9">Autentica a los estudiantes<br/>con su correo institucional</font>>, fillcolor="#8C8C8C"];
+mail [label=<<b>Servicio de correo electrónico</b><br/><font point-size="9">[Sistema externo: Azure Communication Services]</font><br/><font point-size="9">Envía confirmaciones,<br/>recordatorios y avisos</font>>, fillcolor="#8C8C8C"];
+est -> sis [label="Usa [HTTPS]"]; ong -> sis [label="Usa [HTTPS]"]; adm -> sis [label="Usa [HTTPS]"];
+sis -> idp [label="Delega autenticación\n[OpenID Connect]"]; sis -> mail [label="Envía notificaciones\n[API]"];
+mail -> est [label="Entrega correos", style=dashed]; mail -> ong [label="Entrega correos", style=dashed];
+{rank=same; est ong adm} {rank=same; idp mail}
+}

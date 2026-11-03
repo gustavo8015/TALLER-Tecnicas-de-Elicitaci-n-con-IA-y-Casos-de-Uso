@@ -1,0 +1,17 @@
+digraph G { rankdir=TB; nodesep=0.6; ranksep=0.8; compound=true;
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, fontcolor="white", penwidth=0, margin="0.2,0.12"];
+edge [fontname="Helvetica", fontsize=9, color="#555555", fontcolor="#333333"];
+usr [label=<<b>Usuarios</b><br/><font point-size="9">[Personas] Estudiante, Coordinador<br/>de ONG y Administrador</font>>, fillcolor="#08427B"];
+subgraph cluster_s { label=<<b>Voluntariado Connect</b> [Sistema de software]>; fontname="Helvetica"; fontsize=11; style="dashed,rounded"; color="#1168BD";
+ web [label=<<b>Aplicación web</b><br/><font point-size="9">[Contenedor: React, SPA responsive,<br/>Azure Static Web Apps]</font><br/><font point-size="9">Interfaz para los tres roles<br/>en celular y computador</font>>, fillcolor="#438DD5"];
+ ver [label=<<b>Página de verificación</b><br/><font point-size="9">[Componente público de la aplicación web]</font><br/><font point-size="9">Valida un certificado por su código</font>>, fillcolor="#438DD5"];
+ api [label=<<b>API de la plataforma</b><br/><font point-size="9">[Contenedor: ASP.NET Core, API REST,<br/>monolito modular, Azure App Service]</font><br/><font point-size="9">Módulos: cuentas, fundaciones, actividades,<br/>inscripciones, horas y certificados</font>>, fillcolor="#438DD5"];
+ db [label=<<b>Base de datos</b><br/><font point-size="9">[Contenedor: Azure Database for PostgreSQL]</font><br/><font point-size="9">Usuarios, fundaciones, actividades,<br/>inscripciones, horas y bitácora</font>>, fillcolor="#438DD5", shape=cylinder];
+ st [label=<<b>Almacenamiento de archivos</b><br/><font point-size="9">[Contenedor: Azure Blob Storage]</font><br/><font point-size="9">Certificados PDF y documentos<br/>de validación de fundaciones</font>>, fillcolor="#438DD5", shape=cylinder];
+}
+idp [label=<<b>Microsoft Entra ID</b><br/><font point-size="9">[Sistema externo]</font>>, fillcolor="#8C8C8C"];
+mail [label=<<b>Servicio de correo</b><br/><font point-size="9">[Sistema externo: Azure<br/>Communication Services]</font>>, fillcolor="#8C8C8C"];
+usr -> web [label="Usa [HTTPS]"]; web -> api [label="Llama [JSON/HTTPS]"]; ver -> api [label="Consulta código [HTTPS]"];
+api -> db [label="Lee y escribe [SQL/TLS]"]; api -> st [label="Guarda y lee PDF"];
+web -> idp [label="Inicio de sesión\n[OpenID Connect]"]; api -> idp [label="Valida tokens"]; api -> mail [label="Envía avisos [API]"];
+}

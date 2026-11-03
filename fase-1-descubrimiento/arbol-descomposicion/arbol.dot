@@ -1,0 +1,17 @@
+digraph G { rankdir=LR; splines=ortho; nodesep=0.12; ranksep=0.6;
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, fillcolor="#FFFFFF", color="#15803D", penwidth=1.4];
+root [label="Plataforma\nVoluntariado Connect", fillcolor="#15803D", fontcolor="white", fontsize=13];
+node [fillcolor="#DCFCE7"];
+E1 [label="E1. Cuentas\ny acceso"]; E2 [label="E2. Gestión de\nfundaciones"]; E3 [label="E3. Gestión de\nactividades"];
+E4 [label="E4. Inscripciones y\nnotificaciones"]; E5 [label="E5. Registro y\nvalidación de horas"]; E6 [label="E6. Certificación\ny reportes"];
+root -> {E1 E2 E3 E4 E5 E6};
+node [fillcolor="#FFFFFF", fontsize=10];
+a1 [label="Registro con correo\ninstitucional"]; a2 [label="Inicio de sesión"]; a3 [label="Gestión de roles\ny permisos"]; a4 [label="Perfil del\nestudiante"];
+b1 [label="Registro de\nfundación"]; b2 [label="Validación por\nla universidad"]; b3 [label="Datos mínimos de\nbeneficiarios"];
+c1 [label="Publicar actividad"]; c2 [label="Editar o cancelar\nactividad"]; c3 [label="Buscar con filtros"];
+d1 [label="Inscripción con\ncontrol de cupos"]; d2 [label="Cancelar\ninscripción"]; d3 [label="Notificaciones\npor correo"];
+e1 [label="Registrar asistencia\ny horas"]; e2 [label="Aprobar horas"]; e3 [label="Historial de horas"];
+f1 [label="Generar certificado\nPDF"]; f2 [label="Verificar\ncertificado"]; f3 [label="Reporte de horas\npor fundación"];
+E1->a1; E1->a2; E1->a3; E1->a4; E2->b1; E2->b2; E2->b3; E3->c1; E3->c2; E3->c3;
+E4->d1; E4->d2; E4->d3; E5->e1; E5->e2; E5->e3; E6->f1; E6->f2; E6->f3;
+}

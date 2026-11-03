@@ -1,0 +1,29 @@
+@startuml
+skinparam dpi 200
+skinparam monochrome true
+skinparam defaultFontName Helvetica
+node "Dispositivo del usuario\n(celular o computador)" as D {
+  artifact "Navegador web" as NAV
+}
+cloud "Microsoft Azure (región East US 2)" {
+  node "Azure Static Web Apps" as H1 {
+    artifact "Aplicación web React\n(archivos estáticos)" as W
+  }
+  node "Azure App Service\n(plan Linux, 2 instancias)" as H2 {
+    artifact "API ASP.NET Core\n(monolito modular)" as API
+  }
+  database "Azure Database for PostgreSQL\n(servidor flexible, alta\ndisponibilidad y copias diarias)" as DB
+  node "Azure Blob Storage" as ST {
+    artifact "Certificados PDF" as PDF
+  }
+  node "Azure Communication\nServices (correo)" as MAIL
+}
+node "Microsoft Entra ID\n(cuentas institucionales)" as IDP
+NAV --> W : HTTPS
+NAV --> API : HTTPS / JSON
+NAV --> IDP : OpenID Connect
+API --> IDP : validación de tokens
+API --> DB : TCP 5432 / TLS
+API --> ST : HTTPS
+API --> MAIL : HTTPS / API
+@enduml

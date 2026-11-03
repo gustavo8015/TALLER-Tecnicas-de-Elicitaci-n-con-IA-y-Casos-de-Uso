@@ -1,0 +1,23 @@
+@startuml
+skinparam dpi 200
+skinparam monochrome true
+skinparam defaultFontName Helvetica
+title Flujo del prototipo: inscripción a una actividad (rol Estudiante)
+rectangle "Pantalla 1:\nInicio de sesión" as P1 {
+  usecase "[Ingresar con correo\ninstitucional]\n(Hotspot)" as B1
+}
+rectangle "Pantalla 2:\nBuscar actividades" as P2 {
+  usecase "[Tarjeta de actividad]\n(Hotspot)" as B2
+}
+rectangle "Pantalla 3:\nDetalle de actividad" as P3 {
+  usecase "[Inscribirme]\n(Hotspot)" as B3
+}
+rectangle "Pantalla 4:\nInscripción confirmada" as P4 {
+  usecase "[Ver mis horas]\n(Hotspot)" as B4
+}
+rectangle "Pantalla 5:\nMis horas y certificados" as P5
+B1 --> P2 : Trigger: On Tap\nTransición: Dissolve
+B2 --> P3 : Trigger: On Tap\nTransición: Slide Left
+B3 --> P4 : Trigger: On Tap\nOverlay + Delay 1 s
+B4 --> P5 : Trigger: On Tap\nTransición: Slide Left
+@enduml

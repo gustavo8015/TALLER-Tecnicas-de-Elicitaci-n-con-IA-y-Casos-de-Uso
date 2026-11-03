@@ -1,0 +1,4 @@
+scripts/_capturas/
+__pycache__/
+*.pdf
+*.docx

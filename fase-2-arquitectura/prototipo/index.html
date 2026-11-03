@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prototipo Voluntariado Connect</title>
+<style>
+:root{--primary:#15803D;--on-primary:#fff;--accent:#B45309;--bg:#F0FDF4;--fg:#14532D;--card:#fff;--muted:#E8F0F1;--muted-fg:#475569;--border:#BBF7D0;--danger:#DC2626;--r:16px}
+*{box-sizing:border-box}
+body{margin:0;font-family:Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#e5e7eb;color:var(--fg);display:flex;flex-direction:column;align-items:center;padding:24px 12px;gap:12px}
+.hint{font-size:14px;color:#334155;max-width:380px;text-align:center}
+.phone{width:360px;height:740px;background:var(--bg);border-radius:32px;border:10px solid #1f2937;overflow:hidden;position:relative;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateX(24px);transition:opacity .22s ease-out,transform .22s ease-out}
+.screen.on{opacity:1;pointer-events:auto;transform:none}
+.top{background:var(--primary);color:var(--on-primary);padding:16px 18px 14px}
+.top h1{font-size:19px;margin:0}
+.top p{margin:4px 0 0;font-size:13px;opacity:.9}
+.body{flex:1;overflow:auto;padding:14px 16px;display:flex;flex-direction:column;gap:12px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px}
+.card h2{font-size:16px;margin:0 0 4px}
+.meta{font-size:13px;color:var(--muted-fg);display:flex;gap:6px;align-items:center;margin-top:4px}
+.chip{display:inline-block;font-size:12px;padding:4px 10px;border-radius:999px;background:var(--muted);color:var(--fg);margin:2px 4px 2px 0}
+.chip.on{background:var(--primary);color:#fff}
+.btn{min-height:48px;border:0;border-radius:12px;background:var(--primary);color:#fff;font-size:16px;font-weight:600;width:100%;cursor:pointer}
+.btn.sec{background:#fff;color:var(--primary);border:2px solid var(--primary)}
+.btn:focus-visible,.hot:focus-visible{outline:3px solid #F59E0B;outline-offset:2px}
+label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
+.field{border:1px solid #94a3b8;border-radius:10px;background:#fff;min-height:44px;padding:11px 12px;font-size:14px;color:#334155}
+.nav{display:flex;border-top:1px solid var(--border);background:#fff}
+.nav div{flex:1;text-align:center;font-size:11px;padding:8px 0 10px;color:var(--muted-fg)}
+.nav div.on{color:var(--primary);font-weight:700}
+.nav svg{display:block;margin:0 auto 2px}
+.hot{cursor:pointer}
+.bar{height:10px;border-radius:6px;background:var(--muted);overflow:hidden}
+.bar span{display:block;height:100%;background:var(--primary)}
+.big{font-size:34px;font-weight:700;color:var(--primary)}
+.overlay{position:absolute;inset:0;background:rgba(15,23,42,.55);display:flex;align-items:center;justify-content:center;padding:24px}
+.modal{background:#fff;border-radius:20px;padding:24px;text-align:center}
+.ok{width:64px;height:64px;border-radius:50%;background:#DCFCE7;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.logo{width:72px;height:72px;border-radius:20px;background:var(--primary);display:flex;align-items:center;justify-content:center;margin:40px auto 14px}
+.note{font-size:12px;color:var(--muted-fg)}
+/* Modo wireframe: baja fidelidad en escala de grises */
+.wf .phone{border-color:#6b7280;background:#fff}
+.wf .screen,.wf .screen *{color:#222 !important;font-weight:400}.wf h1,.wf h2,.wf b,.wf label{font-weight:700 !important}.wf .card,.wf .field{border:1.5px dashed #6b7280 !important;background:#fff}.wf .chip{background:#fff;border:1px solid #6b7280}.wf .bar span{background:#9ca3af}.wf .nav{border-top:1.5px dashed #6b7280}
+.wf .screen{--primary:#6b7280;--bg:#fff;--fg:#111;--border:#9ca3af;--muted:#e5e7eb;--muted-fg:#6b7280}
+.wf .top{background:#d1d5db;color:#111}
+.wf .btn{background:#9ca3af;color:#111}.wf .btn.sec{background:#fff;color:#111;border-color:#6b7280}
+.wf .logo,.wf .ok{background:#d1d5db}
+.wf .img{background:repeating-linear-gradient(45deg,#e5e7eb,#e5e7eb 6px,#f3f4f6 6px,#f3f4f6 12px)}
+.img{height:110px;border-radius:12px;background:linear-gradient(135deg,#86EFAC,#15803D)}
+</style>
+</head>
+<body>
+<p class="hint">Prototipo navegable de Voluntariado Connect. Toque los botones o las tarjetas para avanzar por el flujo de inscripción.</p>
+<div class="phone">
+
+<section class="screen on" id="s1" aria-label="Inicio de sesión">
+ <div class="body" style="justify-content:center">
+  <div class="logo"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg></div>
+  <h1 style="text-align:center;font-size:22px;margin:0">Voluntariado Connect</h1>
+  <p class="note" style="text-align:center;margin:0 0 18px">Conecta tu tiempo con causas sociales</p>
+  <div><label for="m">Correo institucional</label><div class="field" id="m">nombre.apellido@umb.edu.co</div></div>
+  <button class="btn hot" data-go="s2">Ingresar con correo institucional</button>
+  <button class="btn sec">Soy una fundación</button>
+  <p class="note" style="text-align:center">Al ingresar autorizas el tratamiento de tus datos según la política de privacidad.</p>
+ </div>
+</section>
+
+<section class="screen" id="s2" aria-label="Buscar actividades">
+ <div class="top"><h1>Actividades</h1><p>Hola, Laura. Encuentra una actividad para tu horario</p></div>
+ <div class="body">
+  <div class="field">Buscar por causa o fundación</div>
+  <div><span class="chip on">Fin de semana</span><span class="chip">Tarde</span><span class="chip">Educación</span><span class="chip">Adulto mayor</span></div>
+  <div class="card hot" data-go="s3" tabindex="0" role="button">
+   <h2>Refuerzo escolar para niños</h2>
+   <div class="meta">Fundación Semillas · Kennedy</div>
+   <div class="meta">Sábado 14 nov · 8:00 a 12:00 · 4 h</div>
+   <div style="margin-top:8px"><span class="chip">6 cupos libres</span><span class="chip">Educación</span></div>
+  </div>
+  <div class="card">
+   <h2>Acompañamiento a adultos mayores</h2>
+   <div class="meta">Hogar Años Dorados · Suba</div>
+   <div class="meta">Domingo 15 nov · 9:00 a 13:00 · 4 h</div>
+   <div style="margin-top:8px"><span class="chip">2 cupos libres</span></div>
+  </div>
+  <div class="card">
+   <h2>Jornada de reciclaje</h2>
+   <div class="meta">Red Verde · Chapinero</div>
+   <div class="meta">Sábado 21 nov · 14:00 a 17:00 · 3 h</div>
+  </div>
+ </div>
+ <nav class="nav"><div class="on"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Buscar</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>Mis actividades</div><div class="hot" data-go="s5"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Mis horas</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Perfil</div></nav>
+</section>
+
+<section class="screen" id="s3" aria-label="Detalle de actividad">
+ <div class="top"><h1 class="hot" data-go="s2" style="cursor:pointer">‹ Detalle de la actividad</h1></div>
+ <div class="body">
+  <div class="img" role="img" aria-label="Imagen de la actividad"></div>
+  <div><h2 style="margin:0;font-size:18px">Refuerzo escolar para niños</h2><div class="meta">Fundación Semillas · validada por la universidad</div></div>
+  <div class="card"><div class="meta"><b>Fecha:</b> sábado 14 de noviembre</div><div class="meta"><b>Horario:</b> 8:00 a 12:00 (4 horas)</div><div class="meta"><b>Lugar:</b> Sede Kennedy</div><div class="meta"><b>Cupos:</b> 6 de 15 disponibles</div></div>
+  <div class="card"><b style="font-size:14px">Requisitos</b><div class="meta">Estudiantes de licenciatura o psicología. Experiencia con niños.</div><b style="font-size:14px;display:block;margin-top:8px">Responsable</b><div class="meta">Coordinación de voluntariado</div></div>
+  <button class="btn hot" data-go="s4">Inscribirme</button>
+ </div>
+</section>
+
+<section class="screen" id="s4" aria-label="Inscripción confirmada">
+ <div class="top"><h1>Detalle de la actividad</h1></div>
+ <div class="body"><div class="img"></div></div>
+ <div class="overlay"><div class="modal">
+  <div class="ok"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="3" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></div>
+  <h2 style="margin:0 0 6px">Inscripción confirmada</h2>
+  <p class="note" style="font-size:14px">Te enviamos un correo con los detalles. Recibirás un recordatorio un día antes de la actividad.</p>
+  <button class="btn hot" data-go="s5" style="margin-top:8px">Ver mis horas</button>
+ </div></div>
+</section>
+
+<section class="screen" id="s5" aria-label="Mis horas y certificados">
+ <div class="top"><h1 class="hot" data-go="s2" style="cursor:pointer">‹ Mis horas</h1><p>Requisito de grado: 60 horas</p></div>
+ <div class="body">
+  <div class="card"><div class="big">36 h</div><div class="meta">aprobadas de 60 requeridas</div><div class="bar" style="margin-top:10px"><span style="width:60%"></span></div><div class="meta">4 h pendientes de aprobación por la fundación</div></div>
+  <div class="card"><h2>Fundación Semillas</h2><div class="meta">Refuerzo escolar · 24 h aprobadas</div><button class="btn sec" style="margin-top:10px">Descargar certificado PDF</button></div>
+  <div class="card"><h2>Red Verde</h2><div class="meta">Jornada de reciclaje · 12 h aprobadas</div><button class="btn sec" style="margin-top:10px">Descargar certificado PDF</button></div>
+  <p class="note">Cada certificado incluye un código de verificación que la universidad puede consultar.</p>
+ </div>
+ <nav class="nav"><div class="hot" data-go="s2">Buscar</div><div>Mis actividades</div><div class="on">Mis horas</div><div>Perfil</div></nav>
+</section>
+
+<section class="screen" id="s6" aria-label="Publicar actividad">
+ <div class="top"><h1>Publicar actividad</h1><p>Fundación Semillas · paso 1 de 3</p></div>
+ <div class="body">
+  <div><label>Nombre de la actividad</label><div class="field">Refuerzo escolar para niños</div></div>
+  <div><label>Descripción</label><div class="field" style="min-height:70px">Apoyo en tareas de matemáticas y lectura para niños de 7 a 12 años.</div></div>
+  <div style="display:flex;gap:10px"><div style="flex:1"><label>Fecha</label><div class="field">14/11/2026</div></div><div style="flex:1"><label>Horario</label><div class="field">8:00 a 12:00</div></div></div>
+  <div style="display:flex;gap:10px"><div style="flex:1"><label>Lugar</label><div class="field">Sede Kennedy</div></div><div style="flex:1"><label>Cupos</label><div class="field">15</div></div></div>
+  <div><label>Requisitos especiales</label><div class="field">Experiencia con niños</div></div>
+  <button class="btn">Continuar</button>
+ </div>
+</section>
+
+</div>
+<script>
+document.querySelectorAll('[data-go]').forEach(function(el){
+  function go(){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on')});document.getElementById(el.dataset.go).classList.add('on')}
+  el.addEventListener('click',go);
+  el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}});
+});
+var p=new URLSearchParams(location.search);
+if(p.get('s')){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on')});document.getElementById(p.get('s')).classList.add('on')}
+if(p.get('wf')){document.body.classList.add('wf')}
+</script>
+</body>
+</html>
