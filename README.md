@@ -58,7 +58,8 @@ voluntariado-connect/
 ## Fases del taller
 
 - **Fase 3: Event Storming y modelado como código.** [`actividad.puml`](taller-fase-3-event-storming/actividad.puml), exportado en [PNG](taller-fase-3-event-storming/actividad.png) y [SVG](taller-fase-3-event-storming/actividad.svg) (Entregable 3), y la [lluvia de eventos](taller-fase-3-event-storming/lluvia-de-eventos.png).
-- **Fase 4: User Story Mapping.** [Tablero](taller-fase-4-story-mapping/tablero.png) con Backlog del Producto, Sprint 1 (MVP) y Para el futuro, generado por [`tablero.py`](taller-fase-4-story-mapping/tablero.py).
+- **Fase 4: User Story Mapping.** [Tablero](taller-fase-4-story-mapping/tablero.png) con Backlog del Producto, Sprint 1 (MVP) y Para el futuro, generado por [`tablero.py`](taller-fase-4-story-mapping/tablero.py). Tablero público en Trello: https://trello.com/b/vN7XsR7X ([captura](taller-fase-4-story-mapping/tablero-trello.png)).
+- **Fase 1: mapas de empatía.** Tablero de FigJam: https://www.figma.com/board/vp4WPlftkDTHNNZqGt0Kot
 
 ## Fase 1: descubrimiento y abstracción del negocio
 
