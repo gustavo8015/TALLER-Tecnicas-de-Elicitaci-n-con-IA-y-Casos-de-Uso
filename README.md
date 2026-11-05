@@ -1,9 +1,9 @@
-# Voluntariado Connect: análisis y diseño (Fases 1 y 2)
+# Voluntariado Connect: análisis y diseño (Fases 1 a 4)
 
 Código fuente de los artefactos de análisis y diseño de **Voluntariado Connect**, la plataforma web con la que la universidad conecta a estudiantes interesados en la labor social con fundaciones y ONG locales. La plataforma gestiona perfiles, publica actividades de voluntariado, registra horas de servicio y emite certificados.
 
-Universidad Manuela Beltrán, Ingeniería de Software, 2026.
-Autores: Leidy Yohanna Cardona Bayona y Gustavo Adolfo Cardona Bayona.
+Universidad Manuela Beltrán, Ingeniería de Software, Arquitectura de Software A1, 2026.
+Equipo: Gustavo Adolfo Cardona Bayona (@gustavo8015), Pablo Andrés Salazar Salazar (@Pasalazar83) y Miguel Ángel Monroy (@umbmu).
 
 El repositorio cubre las **Fases 1 a 4** de análisis y diseño y las fases del taller (entrevista con IA, Event Storming y User Story Mapping). Todos los diagramas están escritos como código (Graphviz y PlantUML), y los wireframes, los mockups y el prototipo salen de un mismo archivo HTML.
 
