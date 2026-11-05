@@ -61,6 +61,8 @@ voluntariado-connect/
 - **Fase 4: User Story Mapping.** [Tablero](taller-fase-4-story-mapping/tablero.png) con Backlog del Producto, Sprint 1 (MVP) y Para el futuro, generado por [`tablero.py`](taller-fase-4-story-mapping/tablero.py). Tablero público en Trello: https://trello.com/b/vN7XsR7X ([captura](taller-fase-4-story-mapping/tablero-trello.png)).
 - **Fase 1: mapas de empatía.** Tablero de FigJam: https://www.figma.com/board/vp4WPlftkDTHNNZqGt0Kot
 
+- **Retroalimentación de experimentos.** Cinco experimentos (EXP-01 a EXP-05) programados en la lista Experimentos (validación) del tablero de Trello, con la cadencia de planificación, standup, learning, retrospectiva y decisión. Ver el [canvas de EXP-03](retroalimentacion-experimentos/canvas-exp03.png).
+
 ## Fase 1: descubrimiento y abstracción del negocio
 
 ### 1. Requerimientos
