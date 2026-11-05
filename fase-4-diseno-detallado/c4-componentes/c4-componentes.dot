@@ -1,0 +1,25 @@
+digraph G { rankdir=TB; nodesep=0.35; ranksep=0.55; compound=true;
+node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, fontcolor="white", penwidth=0, margin="0.15,0.1"];
+edge [fontname="Helvetica", fontsize=8, color="#555555", fontcolor="#333333"];
+web [label=<<b>Aplicación web</b><br/><font point-size="8">[Contenedor: React]</font>>, fillcolor="#438DD5"];
+subgraph cluster_api { label=<<b>API de la plataforma</b> [Contenedor: ASP.NET Core, monolito modular]>; fontname="Helvetica"; fontsize=11; style="dashed,rounded"; color="#1168BD";
+ auth [label=<<b>Middleware de autenticación</b><br/><font point-size="8">[Componente] Valida el token JWT<br/>de Entra ID y el rol</font>>, fillcolor="#85BBF0", fontcolor="black"];
+ ctrl [label=<<b>Controladores REST</b><br/><font point-size="8">[Componente] Cuentas, Fundaciones, Actividades,<br/>Inscripciones, Horas y Certificados</font>>, fillcolor="#85BBF0", fontcolor="black"];
+ svc [label=<<b>Servicios de aplicación</b><br/><font point-size="8">[Componente] ServicioInscripcion, ServicioHoras,<br/>ServicioCertificacion, ServicioFundaciones</font>>, fillcolor="#85BBF0", fontcolor="black"];
+ dom [label=<<b>Modelo de dominio</b><br/><font point-size="8">[Componente] Actividad, Inscripcion,<br/>RegistroHoras, Certificado y reglas</font>>, fillcolor="#85BBF0", fontcolor="black"];
+ repo [label=<<b>Repositorios</b><br/><font point-size="8">[Componente: Entity Framework Core]<br/>Persistencia y bloqueo de cupos</font>>, fillcolor="#85BBF0", fontcolor="black"];
+ notif [label=<<b>Adaptador de notificaciones</b><br/><font point-size="8">[Componente] Envía correos a partir<br/>de eventos de dominio</font>>, fillcolor="#85BBF0", fontcolor="black"];
+ pdf [label=<<b>Generador de certificados</b><br/><font point-size="8">[Componente] PDF con código<br/>de verificación</font>>, fillcolor="#85BBF0", fontcolor="black"];
+ files [label=<<b>Adaptador de archivos</b><br/><font point-size="8">[Componente] Guarda y firma<br/>enlaces de descarga</font>>, fillcolor="#85BBF0", fontcolor="black"];
+{rank=same; notif; pdf; files; audit; repo;}
+ audit [label=<<b>Bitácora</b><br/><font point-size="8">[Componente] Registra cambios<br/>de horas y certificados</font>>, fillcolor="#85BBF0", fontcolor="black"];
+}
+db [label=<<b>Base de datos</b><br/><font point-size="8">[Contenedor: PostgreSQL]</font>>, fillcolor="#438DD5", shape=cylinder];
+blob [label=<<b>Almacenamiento</b><br/><font point-size="8">[Contenedor: Blob Storage]</font>>, fillcolor="#438DD5", shape=cylinder];
+idp [label=<<b>Microsoft Entra ID</b><br/><font point-size="8">[Sistema externo]</font>>, fillcolor="#8C8C8C"];
+mail [label=<<b>Servicio de correo</b><br/><font point-size="8">[Sistema externo]</font>>, fillcolor="#8C8C8C"];
+web -> auth [label="JSON/HTTPS"]; auth -> idp [label="Claves públicas\n[OpenID Connect]", style=dashed];
+auth -> ctrl; ctrl -> svc [label="Invoca"]; svc -> dom [label="Aplica reglas"]; svc -> repo [label="Lee y escribe"];
+svc -> notif [label="Publica eventos"]; svc -> pdf; svc -> files; svc -> audit;
+repo -> db [label="SQL/TLS"]; audit -> db [label="SQL/TLS"]; files -> blob [label="HTTPS"]; notif -> mail [label="API"];
+}

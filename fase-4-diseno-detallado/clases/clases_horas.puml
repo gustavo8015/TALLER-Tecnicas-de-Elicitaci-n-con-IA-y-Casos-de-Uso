@@ -1,0 +1,66 @@
+@startuml
+skinparam dpi 180
+skinparam monochrome true
+skinparam defaultFontName Helvetica
+skinparam classAttributeIconSize 0
+title Módulo Horas y Certificación (E5, E6)
+class Inscripcion <<del módulo E4>> {
+  - id : Guid
+  - estado : EstadoInscripcion
+}
+class RegistroHoras {
+  - id : Guid
+  - horas : decimal
+  - estado : EstadoHoras
+  - registradoPor : Guid
+  - aprobadoPor : Guid?
+  - fechaAprobacion : DateTime?
+  + aprobar(responsableId : Guid) : void
+  + rechazar(responsableId : Guid, motivo : string) : void
+}
+enum EstadoHoras {
+  PENDIENTE
+  APROBADO
+  RECHAZADO
+}
+class Certificado {
+  - id : Guid
+  - codigoVerificacion : string
+  - totalHoras : decimal
+  - periodoInicio : DateOnly
+  - periodoFin : DateOnly
+  - urlPdf : string
+  - emitidoEn : DateTime
+  + verificar(codigo : string) : bool
+}
+class EntradaBitacora {
+  - entidad : string
+  - accion : string
+  - valorAnterior : string
+  - valorNuevo : string
+  - usuarioId : Guid
+  - fecha : DateTime
+}
+class ServicioCertificacion {
+  + emitir(estudianteId : Guid, fundacionId : Guid) : Certificado
+  + verificar(codigo : string) : ResultadoVerificacion
+}
+class ServicioHoras {
+  + registrar(inscripcionId : Guid, horas : decimal) : RegistroHoras
+  + aprobar(registroId : Guid, responsableId : Guid) : void
+}
+interface IGeneradorPdf {
+  + generar(c : Certificado) : byte[]
+}
+interface IAlmacenArchivos {
+  + guardar(nombre : string, contenido : byte[]) : string
+}
+Inscripcion "1" -- "0..1" RegistroHoras : genera
+Certificado "0..1" o-- "1..*" RegistroHoras : certifica
+RegistroHoras --> EstadoHoras
+ServicioHoras ..> RegistroHoras
+ServicioHoras ..> EntradaBitacora : registra
+ServicioCertificacion ..> Certificado
+ServicioCertificacion ..> IGeneradorPdf : usa
+ServicioCertificacion ..> IAlmacenArchivos : usa
+@enduml

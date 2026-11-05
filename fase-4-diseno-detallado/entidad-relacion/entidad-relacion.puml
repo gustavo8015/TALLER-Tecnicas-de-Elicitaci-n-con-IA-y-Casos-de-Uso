@@ -1,0 +1,135 @@
+@startuml
+skinparam dpi 170
+skinparam monochrome true
+skinparam defaultFontName Helvetica
+skinparam linetype ortho
+hide circle
+entity "usuario" as U {
+  * id : uuid <<PK>>
+  --
+  * correo : varchar <<UK>>
+  * nombre : varchar
+  * rol : varchar
+  * activo : boolean
+}
+entity "estudiante" as E {
+  * id : uuid <<PK>>
+  --
+  * usuario_id : uuid <<FK, UK>>
+  * codigo : varchar
+  * programa : varchar
+  * horas_requeridas : int
+}
+entity "fundacion" as F {
+  * id : uuid <<PK>>
+  --
+  * nit : varchar <<UK>>
+  * nombre : varchar
+  * estado_validacion : varchar
+  validada_por : uuid <<FK>>
+  fecha_validacion : timestamp
+}
+entity "miembro_fundacion" as M {
+  * id : uuid <<PK>>
+  --
+  * usuario_id : uuid <<FK>>
+  * fundacion_id : uuid <<FK>>
+  * cargo : varchar
+}
+entity "beneficiario" as B {
+  * id : uuid <<PK>>
+  --
+  * fundacion_id : uuid <<FK>>
+  * nombre : varchar
+  * rango_edad : varchar
+  * programa : varchar
+  contacto_acudiente : varchar
+  datos_sensibles : bytea (cifrado)
+}
+entity "actividad" as A {
+  * id : uuid <<PK>>
+  --
+  * fundacion_id : uuid <<FK>>
+  * creada_por : uuid <<FK>>
+  * nombre : varchar
+  * fecha : date
+  * hora_inicio : time
+  * hora_fin : time
+  * lugar : varchar
+  * localidad : varchar
+  * causa : varchar
+  * cupos_totales : int
+  * cupos_ocupados : int
+  * estado : varchar
+  * version : int
+}
+entity "inscripcion" as I {
+  * id : uuid <<PK>>
+  --
+  * actividad_id : uuid <<FK>>
+  * estudiante_id : uuid <<FK>>
+  * estado : varchar
+  * fecha : timestamp
+  UK (actividad_id, estudiante_id)
+}
+entity "registro_horas" as R {
+  * id : uuid <<PK>>
+  --
+  * inscripcion_id : uuid <<FK, UK>>
+  * horas : numeric(4,1)
+  * estado : varchar
+  * registrado_por : uuid <<FK>>
+  aprobado_por : uuid <<FK>>
+  fecha_aprobacion : timestamp
+}
+entity "certificado" as C {
+  * id : uuid <<PK>>
+  --
+  * estudiante_id : uuid <<FK>>
+  * fundacion_id : uuid <<FK>>
+  * codigo_verificacion : varchar <<UK>>
+  * total_horas : numeric(5,1)
+  * periodo_inicio : date
+  * periodo_fin : date
+  * url_pdf : varchar
+  * emitido_en : timestamp
+}
+entity "certificado_detalle" as CD {
+  * certificado_id : uuid <<PK, FK>>
+  * registro_horas_id : uuid <<PK, FK, UK>>
+}
+entity "notificacion" as N {
+  * id : uuid <<PK>>
+  --
+  * usuario_id : uuid <<FK>>
+  * tipo : varchar
+  * estado : varchar
+  enviada_en : timestamp
+}
+entity "bitacora" as L {
+  * id : bigint <<PK>>
+  --
+  * usuario_id : uuid <<FK>>
+  * entidad : varchar
+  * entidad_id : uuid
+  * accion : varchar
+  valor_anterior : jsonb
+  valor_nuevo : jsonb
+  * fecha : timestamp
+}
+U ||--o| E
+U ||--o{ M
+F ||--|{ M
+F ||--o{ B
+F ||--o{ A
+M ||--o{ A
+A ||--o{ I
+E ||--o{ I
+I ||--o| R
+E ||--o{ C
+F ||--o{ C
+C ||--|{ CD
+R ||--o| CD
+U ||--o{ N
+U ||--o{ L
+@enduml

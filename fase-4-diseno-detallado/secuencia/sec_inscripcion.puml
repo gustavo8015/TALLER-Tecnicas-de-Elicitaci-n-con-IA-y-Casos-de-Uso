@@ -1,0 +1,36 @@
+@startuml
+skinparam dpi 170
+skinparam monochrome true
+hide footbox
+skinparam defaultFontName Helvetica
+title Secuencia: inscripción con control de cupos (HU-05)
+actor Estudiante
+participant "Aplicación web" as W
+participant "InscripcionesController" as C
+participant "ServicioInscripcion" as S
+database "PostgreSQL" as DB
+participant "Notificador" as N
+participant "Azure Communication\nServices" as ACS
+Estudiante -> W : Toca "Inscribirme"\n(hotspot del prototipo)
+W -> C : POST /actividades/{id}/inscripciones\n(token Entra ID)
+C -> S : inscribir(estudianteId, actividadId)
+S -> DB : BEGIN
+S -> DB : SELECT actividad ... FOR UPDATE
+alt hay cupo y no está inscrito
+  S -> DB : INSERT inscripcion
+  S -> DB : UPDATE actividad SET cupos_ocupados + 1
+  S -> DB : INSERT bitacora
+  S -> DB : COMMIT
+  S ->> N : InscripcionConfirmada (evento)
+  S --> C : inscripción
+  C --> W : 201 Created
+  W --> Estudiante : Overlay "Inscripción confirmada"
+  N ->> ACS : enviar correo al estudiante
+  N ->> ACS : enviar aviso al coordinador
+else sin cupo o inscripción duplicada
+  S -> DB : ROLLBACK
+  S --> C : ActividadLlena
+  C --> W : 409 Conflict
+  W --> Estudiante : "Actividad llena" y sugerencias
+end
+@enduml

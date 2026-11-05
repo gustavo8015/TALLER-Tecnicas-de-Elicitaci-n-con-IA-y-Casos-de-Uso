@@ -1,0 +1,71 @@
+<html><head><meta charset="utf-8"><style>
+body{margin:0;font-family:Helvetica,Arial,sans-serif;background:#fff}
+.wrap{padding:24px;width:1880px}
+h1{font-size:26px;margin:0 0 4px}.sub{font-size:15px;color:#555;margin-bottom:16px}
+.row{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.lbl{width:120px;font-size:13px;font-weight:bold;color:#333;padding-top:10px;flex:none}
+.n{width:124px;min-height:70px;padding:8px;font-size:13px;line-height:1.25;box-shadow:2px 3px 4px rgba(0,0,0,.18);flex:none}
+.ev{background:#FFA94D}.cmd{background:#74C0FC}.act{background:#FFF3BF}.hot{background:#F783AC}.pol{background:#D0BFFF}.empty{visibility:hidden}
+.arrow{font-size:22px;color:#666;width:14px;flex:none;padding-top:20px}
+.legend{display:flex;gap:18px;margin-top:16px;font-size:13px}.legend span{display:inline-block;width:16px;height:16px;vertical-align:middle;margin-right:6px}
+</style></head><body><div class="wrap">
+<h1>Event Storming: un estudiante se inscribe a una actividad y recibe su certificado</h1>
+<div class="sub">Voluntariado Connect · eventos de dominio en orden cronológico (izquierda a derecha)</div>
+<div class="row"><div class="lbl">Actor</div>
+<div class="n act">Estudiante</div><div class="arrow"></div>
+<div class="n act">Coordinador ONG</div><div class="arrow"></div>
+<div class="n act">Administrador universitario</div><div class="arrow"></div>
+<div class="n act">Coordinador ONG</div><div class="arrow"></div>
+<div class="n act">Estudiante</div><div class="arrow"></div>
+<div class="n act">Sistema</div><div class="arrow"></div>
+<div class="n act">Coordinador ONG</div><div class="arrow"></div>
+<div class="n act">Responsable fundación</div><div class="arrow"></div>
+<div class="n act">Estudiante</div><div class="arrow"></div>
+<div class="n act">Administrador universitario</div></div>
+<div class="row"><div class="lbl">Comando</div>
+<div class="n cmd">Crear cuenta con correo institucional</div><div class="arrow"></div>
+<div class="n cmd">Registrar fundación</div><div class="arrow"></div>
+<div class="n cmd">Validar fundación</div><div class="arrow"></div>
+<div class="n cmd">Publicar actividad</div><div class="arrow"></div>
+<div class="n cmd">Inscribirse en actividad</div><div class="arrow"></div>
+<div class="n cmd">Enviar recordatorio</div><div class="arrow"></div>
+<div class="n cmd">Registrar asistencia y horas</div><div class="arrow"></div>
+<div class="n cmd">Aprobar horas</div><div class="arrow"></div>
+<div class="n cmd">Solicitar certificado</div><div class="arrow"></div>
+<div class="n cmd">Verificar código</div></div>
+<div class="row"><div class="lbl">Evento de dominio</div>
+<div class="n ev"><b>Cuenta Creada</b></div><div class="arrow">→</div>
+<div class="n ev"><b>Fundación Registrada</b></div><div class="arrow">→</div>
+<div class="n ev"><b>ONG Validada</b></div><div class="arrow">→</div>
+<div class="n ev"><b>Evento Publicado</b></div><div class="arrow">→</div>
+<div class="n ev"><b>Estudiante Inscrito</b></div><div class="arrow">→</div>
+<div class="n ev"><b>Recordatorio Enviado</b></div><div class="arrow">→</div>
+<div class="n ev"><b>Horas Registradas</b></div><div class="arrow">→</div>
+<div class="n ev"><b>Horas Aprobadas</b></div><div class="arrow">→</div>
+<div class="n ev"><b>Certificado Emitido</b></div><div class="arrow">→</div>
+<div class="n ev"><b>Certificado Verificado</b></div></div>
+<div class="row"><div class="lbl">Política</div>
+<div class="n empty"></div><div class="arrow"></div>
+<div class="n empty"></div><div class="arrow"></div>
+<div class="n pol">Si la ONG no está validada, no puede publicar</div><div class="arrow"></div>
+<div class="n empty"></div><div class="arrow"></div>
+<div class="n pol">Al inscribirse, notificar al estudiante y al coordinador</div><div class="arrow"></div>
+<div class="n pol">Un día antes de la actividad, enviar recordatorio</div><div class="arrow"></div>
+<div class="n empty"></div><div class="arrow"></div>
+<div class="n pol">Solo horas aprobadas cuentan para el certificado</div><div class="arrow"></div>
+<div class="n empty"></div><div class="arrow"></div>
+<div class="n empty"></div></div>
+<div class="row"><div class="lbl">Punto crítico</div>
+<div class="n empty"></div><div class="arrow"></div>
+<div class="n empty"></div><div class="arrow"></div>
+<div class="n hot">ONG Rechazada: documentos incompletos</div><div class="arrow"></div>
+<div class="n empty"></div><div class="arrow"></div>
+<div class="n hot">Cupo Agotado: dos estudiantes piden el último cupo</div><div class="arrow"></div>
+<div class="n empty"></div><div class="arrow"></div>
+<div class="n hot">Inasistencia Marcada</div><div class="arrow"></div>
+<div class="n hot">Horas Rechazadas con observación</div><div class="arrow"></div>
+<div class="n empty"></div><div class="arrow"></div>
+<div class="n hot">Código inválido o alterado</div></div>
+<div class="legend"><div><span style="background:#FFA94D"></span>Evento de dominio</div><div><span style="background:#74C0FC"></span>Comando</div><div><span style="background:#FFF3BF"></span>Actor</div><div><span style="background:#D0BFFF"></span>Política</div><div><span style="background:#F783AC"></span>Punto crítico o excepción</div></div>
+<div style="margin-top:10px;font-size:13px;color:#333;border-top:1px solid #999;padding-top:6px">Equipo: Gustavo Adolfo Cardona Bayona, Pablo Andrés Salazar Salazar y Miguel Ángel Monroy · UMB · 2026</div>
+</div></body></html>

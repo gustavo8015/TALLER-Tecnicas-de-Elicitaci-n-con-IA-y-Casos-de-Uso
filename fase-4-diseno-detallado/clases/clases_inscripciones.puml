@@ -1,0 +1,67 @@
+@startuml
+skinparam dpi 180
+skinparam monochrome true
+skinparam defaultFontName Helvetica
+skinparam classAttributeIconSize 0
+title Módulo Actividades e Inscripciones (E3, E4)
+class Actividad {
+  - id : Guid
+  - nombre : string
+  - fecha : DateOnly
+  - horario : RangoHorario
+  - lugar : string
+  - cuposTotales : int
+  - cuposOcupados : int
+  - estado : EstadoActividad
+  - version : int
+  + publicar() : void
+  + cancelar(motivo : string) : void
+  + hayCupo() : bool
+  + reservarCupo(estudianteId : Guid) : Inscripcion
+}
+class Inscripcion {
+  - id : Guid
+  - estudianteId : Guid
+  - fecha : DateTime
+  - estado : EstadoInscripcion
+  + cancelar() : void
+  + marcarAsistencia(asistio : bool) : void
+}
+class Estudiante {
+  - id : Guid
+  - codigo : string
+  - programa : string
+  - horasRequeridas : int
+}
+enum EstadoActividad {
+  BORRADOR
+  PUBLICADA
+  LLENA
+  CANCELADA
+  FINALIZADA
+}
+enum EstadoInscripcion {
+  CONFIRMADA
+  CANCELADA
+  ASISTIO
+  NO_ASISTIO
+}
+class ServicioInscripcion {
+  + inscribir(estudianteId : Guid, actividadId : Guid) : Inscripcion
+  + cancelar(inscripcionId : Guid) : void
+}
+interface IRepositorioActividades {
+  + obtenerConBloqueo(id : Guid) : Actividad
+  + guardar(a : Actividad) : void
+}
+interface INotificador {
+  + publicar(evento : EventoDominio) : void
+}
+Actividad "1" *-- "0..*" Inscripcion : contiene
+Estudiante "1" -- "0..*" Inscripcion : realiza
+Actividad --> EstadoActividad
+Inscripcion --> EstadoInscripcion
+ServicioInscripcion ..> IRepositorioActividades : usa
+ServicioInscripcion ..> INotificador : usa
+ServicioInscripcion ..> Actividad
+@enduml

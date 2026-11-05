@@ -1,0 +1,43 @@
+@startuml
+skinparam dpi 170
+skinparam monochrome true
+hide footbox
+skinparam defaultFontName Helvetica
+title Secuencia: aprobación de horas y emisión del certificado (HU-07, HU-08)
+actor "Responsable\nfundación" as R
+actor Estudiante
+participant "Aplicación web" as W
+participant "API" as API
+participant "ServicioHoras" as SH
+participant "ServicioCertificacion" as SC
+database "PostgreSQL" as DB
+participant "Generador PDF" as PDF
+participant "Azure Blob\nStorage" as BLOB
+R -> W : Toca "Aprobar"
+W -> API : POST /horas/{id}/aprobacion
+API -> SH : aprobar(registroId, responsableId)
+SH -> DB : UPDATE registro_horas SET estado = APROBADO
+SH -> DB : INSERT bitacora (valor anterior y nuevo)
+SH --> API : ok
+API --> W : 200 OK
+== Más tarde ==
+Estudiante -> W : Toca "Descargar certificado PDF"
+W -> API : POST /certificados
+API -> SC : emitir(estudianteId, fundacionId)
+SC -> DB : SELECT horas APROBADO sin certificar
+alt hay horas aprobadas
+  SC -> SC : generar código de verificación único
+  SC -> PDF : generar(certificado)
+  PDF --> SC : archivo PDF
+  SC -> BLOB : guardar PDF
+  BLOB --> SC : URL
+  SC -> DB : INSERT certificado y certificado_detalle
+  SC --> API : certificado
+  API --> W : 201 Created + enlace temporal de descarga
+  W --> Estudiante : descarga el PDF
+else sin horas aprobadas
+  SC --> API : SinHorasAprobadas
+  API --> W : 422
+  W --> Estudiante : "Aún no tienes horas aprobadas"
+end
+@enduml

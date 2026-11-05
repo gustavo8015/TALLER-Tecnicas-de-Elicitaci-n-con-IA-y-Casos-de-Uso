@@ -1,0 +1,55 @@
+@startuml
+skinparam dpi 180
+skinparam monochrome true
+skinparam defaultFontName Helvetica
+title Un estudiante se inscribe a una actividad\ny recibe su certificado
+|Fundación|
+start
+:Registrar fundación;
+|Administrador universitario|
+:Revisar documentos;
+if (¿Fundación validada?) then (sí)
+  |Fundación|
+  :Publicar actividad con cupos;
+else (no)
+  :Notificar rechazo con motivo;
+  stop
+endif
+|Estudiante|
+:Iniciar sesión;
+:Elegir actividad;
+|Sistema|
+:Verificar disponibilidad de cupos;
+if (¿Hay cupos disponibles?) then (sí)
+  :Registrar inscripción\ny descontar cupo;
+  fork
+    :Confirmar al estudiante;
+  fork again
+    :Avisar al coordinador;
+  end fork
+else (no)
+  :Mostrar "Actividad llena";
+  note right: RNF-04: respuesta < 2 s
+  :Sugerir similares;
+  stop
+endif
+|Fundación|
+:Registrar asistencia y horas;
+if (¿El estudiante asistió?) then (no)
+  :Marcar inasistencia;
+  stop
+else (sí)
+endif
+|Fundación|
+if (¿El responsable aprueba\nlas horas?) then (no)
+  :Rechazar con observación;
+  stop
+else (sí)
+endif
+|Sistema|
+:Sumar horas al historial\ny registrar en bitácora;
+:Generar certificado PDF\ncon código de verificación;
+|Estudiante|
+:Descargar certificado;
+stop
+@enduml

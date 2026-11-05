@@ -1,0 +1,16 @@
+[
+{"id":"HU-01","epica":"E1","lista":"mvp","puntos":3,"prioridad":"Alta","texto":"Como estudiante, quiero ingresar con mi correo institucional para no tener que crear ni recordar otra contraseña."},
+{"id":"HU-02","epica":"E2","lista":"mvp","puntos":5,"prioridad":"Alta","texto":"Como administrador universitario, quiero validar a una fundación antes de que publique para que solo organizaciones legítimas convoquen voluntarios."},
+{"id":"HU-03","epica":"E3","lista":"mvp","puntos":5,"prioridad":"Alta","texto":"Como coordinador de ONG, quiero publicar una actividad con fecha, lugar, cupos y requisitos para conseguir voluntarios con el perfil adecuado."},
+{"id":"HU-04","epica":"E3","lista":"mvp","puntos":3,"prioridad":"Alta","texto":"Como estudiante, quiero filtrar actividades por horario, localidad y causa para encontrar una compatible con mis clases."},
+{"id":"HU-05","epica":"E4","lista":"mvp","puntos":5,"prioridad":"Alta","texto":"Como estudiante, quiero inscribirme en una actividad con cupo disponible para asegurar mi participación."},
+{"id":"HU-06","epica":"E5","lista":"mvp","puntos":5,"prioridad":"Alta","texto":"Como coordinador de ONG, quiero registrar la asistencia y las horas desde el celular para dejar de usar planillas de papel."},
+{"id":"HU-07","epica":"E5","lista":"mvp","puntos":3,"prioridad":"Alta","texto":"Como responsable de la fundación, quiero aprobar o rechazar las horas registradas para evitar horas que no correspondan."},
+{"id":"HU-08","epica":"E6","lista":"mvp","puntos":5,"prioridad":"Alta","texto":"Como estudiante, quiero descargar mi certificado en PDF para presentarlo en la universidad."},
+{"id":"HU-09","epica":"E4","lista":"backlog","puntos":3,"prioridad":"Media","texto":"Como coordinador de ONG, quiero recibir un aviso cuando un estudiante se inscriba o cancele para planear la actividad."},
+{"id":"HU-10","epica":"E4","lista":"backlog","puntos":2,"prioridad":"Media","texto":"Como estudiante, quiero recibir un recordatorio un día antes de la actividad para no olvidar asistir."},
+{"id":"HU-11","epica":"E5","lista":"backlog","puntos":2,"prioridad":"Media","texto":"Como estudiante, quiero ver mis horas aprobadas frente al requisito de grado para saber cuánto me falta."},
+{"id":"HU-12","epica":"E6","lista":"backlog","puntos":3,"prioridad":"Media","texto":"Como administrador universitario, quiero verificar un certificado con su código para confirmar que es auténtico."},
+{"id":"HU-13","epica":"E6","lista":"futuro","puntos":5,"prioridad":"Baja","texto":"Como coordinador de ONG, quiero un reporte de horas por periodo para informar a los financiadores."},
+{"id":"HU-14","epica":"E2","lista":"futuro","puntos":3,"prioridad":"Baja","texto":"Como coordinador de ONG, quiero registrar solo los datos mínimos de mis beneficiarios para coordinar la atención sin exponer su información."}
+]

@@ -5,7 +5,7 @@ Código fuente de los artefactos de análisis y diseño de **Voluntariado Connec
 Universidad Manuela Beltrán, Ingeniería de Software, 2026.
 Autores: Leidy Yohanna Cardona Bayona y Gustavo Adolfo Cardona Bayona.
 
-El repositorio llega **solo hasta la Fase 2**. Todos los diagramas están escritos como código (Graphviz y PlantUML), y los wireframes, los mockups y el prototipo salen de un mismo archivo HTML.
+El repositorio cubre las **Fases 1 a 4** de análisis y diseño y las fases del taller (entrevista con IA, Event Storming y User Story Mapping). Todos los diagramas están escritos como código (Graphviz y PlantUML), y los wireframes, los mockups y el prototipo salen de un mismo archivo HTML.
 
 ## Prototipo navegable
 
@@ -30,6 +30,13 @@ Antes del análisis se hizo una entrevista con MS Copilot, que actuó como direc
 | 7 | Diagrama de despliegue | 2 | [`despliegue.puml`](fase-2-arquitectura/despliegue/despliegue.puml) | [PNG](fase-2-arquitectura/despliegue/despliegue.png) |
 | 8 | Mockups | 2 | [`index.html`](fase-2-arquitectura/prototipo/index.html) | [PNG](fase-2-arquitectura/mockups/mockups.png) |
 | 9 | Prototipo funcional | 2 | [`index.html`](fase-2-arquitectura/prototipo/index.html), [`flujo-prototipo.puml`](fase-2-arquitectura/prototipo/flujo-prototipo.puml) | [Flujo](fase-2-arquitectura/prototipo/flujo-prototipo.png), [Pantallas](fase-2-arquitectura/prototipo/pantallas-prototipo.png) |
+| 10 | Historias de usuario | 3 | [`historias.json`](fase-3-detalle-agil/historias.json) | [Lista](fase-3-detalle-agil/README.md) |
+| 11 | Criterios de aceptación y DoR | 3 | Documento del taller | [Mockups DoR](fase-3-detalle-agil/mockups-dor.png) |
+| 12 | Diagrama entidad relación | 4 | [`entidad-relacion.puml`](fase-4-diseno-detallado/entidad-relacion/entidad-relacion.puml) | [PNG](fase-4-diseno-detallado/entidad-relacion/entidad-relacion.png) |
+| 13 | Diagramas de clases por módulo | 4 | [`clases_inscripciones.puml`](fase-4-diseno-detallado/clases/clases_inscripciones.puml), [`clases_horas.puml`](fase-4-diseno-detallado/clases/clases_horas.puml) | [Inscripciones](fase-4-diseno-detallado/clases/clases_inscripciones.png), [Horas](fase-4-diseno-detallado/clases/clases_horas.png) |
+| 14 | Diagramas de secuencia | 4 | [`sec_inscripcion.puml`](fase-4-diseno-detallado/secuencia/sec_inscripcion.puml), [`sec_certificado.puml`](fase-4-diseno-detallado/secuencia/sec_certificado.puml) | [Inscripción](fase-4-diseno-detallado/secuencia/sec_inscripcion.png), [Certificado](fase-4-diseno-detallado/secuencia/sec_certificado.png) |
+| 15 | Diagrama C4 nivel 3 (componentes) | 4 | [`c4-componentes.dot`](fase-4-diseno-detallado/c4-componentes/c4-componentes.dot) | [PNG](fase-4-diseno-detallado/c4-componentes/c4-componentes.png) |
+| 16 | Definition of Done | 4 | Documento del taller | |
 
 ```
 voluntariado-connect/
@@ -47,6 +54,11 @@ voluntariado-connect/
     ├── render-diagramas.sh     genera los PNG de los diagramas
     └── capturas_pantallas.py   genera wireframes, mockups y pantallas
 ```
+
+## Fases del taller
+
+- **Fase 3: Event Storming y modelado como código.** [`actividad.puml`](taller-fase-3-event-storming/actividad.puml), exportado en [PNG](taller-fase-3-event-storming/actividad.png) y [SVG](taller-fase-3-event-storming/actividad.svg) (Entregable 3), y la [lluvia de eventos](taller-fase-3-event-storming/lluvia-de-eventos.png).
+- **Fase 4: User Story Mapping.** [Tablero](taller-fase-4-story-mapping/tablero.png) con Backlog del Producto, Sprint 1 (MVP) y Para el futuro, generado por [`tablero.py`](taller-fase-4-story-mapping/tablero.py).
 
 ## Fase 1: descubrimiento y abstracción del negocio
 
@@ -116,6 +128,6 @@ Para ver el prototipo en local, abra `fase-2-arquitectura/prototipo/index.html` 
 
 ## Alcance
 
-Este repositorio cubre la Fase 1 (descubrimiento) y la Fase 2 (diseño arquitectural macro). Las historias de usuario, los criterios de aceptación, el modelo entidad relación y los diagramas de clases, de secuencia y C4 nivel 3 corresponden a fases posteriores.
+Este repositorio cubre las cuatro fases de análisis y diseño. La implementación del código de la plataforma corresponde al Sprint 1.
 
 Los datos de fundaciones, personas y actividades que aparecen en el prototipo son ficticios.

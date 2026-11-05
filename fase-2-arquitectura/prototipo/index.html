@@ -137,6 +137,39 @@ label{font-size:13px;font-weight:600;display:block;margin-bottom:4px}
  </div>
 </section>
 
+<section class="screen" id="s7" aria-label="Registrar asistencia y horas">
+ <div class="top"><h1>Registrar asistencia</h1><p>Refuerzo escolar · sábado 14 nov · 4 h</p></div>
+ <div class="body">
+  <p class="note" style="margin:0">Marque quién asistió y ajuste las horas si alguien llegó tarde o salió antes.</p>
+  <div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div><h2>Laura Gómez</h2><div class="meta">Licenciatura · confirmada</div></div><span class="chip on">Asistió</span></div><div style="display:flex;gap:10px;margin-top:8px;align-items:center"><label style="margin:0">Horas</label><div class="field" style="flex:1;min-height:40px;padding:8px 12px">4</div></div></div>
+  <div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div><h2>Andrés Rojas</h2><div class="meta">Psicología · confirmada</div></div><span class="chip on">Asistió</span></div><div style="display:flex;gap:10px;margin-top:8px;align-items:center"><label style="margin:0">Horas</label><div class="field" style="flex:1;min-height:40px;padding:8px 12px">3</div></div></div>
+  <div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div><h2>Camila Torres</h2><div class="meta">Licenciatura · confirmada</div></div><span class="chip">No asistió</span></div></div>
+  <button class="btn">Enviar para aprobación</button>
+  <p class="note">Las horas quedan pendientes hasta que un responsable de la fundación las apruebe.</p>
+ </div>
+</section>
+
+<section class="screen" id="s8" aria-label="Validar fundación">
+ <div class="top"><h1>Validar fundación</h1><p>Administración universitaria · 3 solicitudes</p></div>
+ <div class="body">
+  <div class="card"><h2>Fundación Semillas</h2><div class="meta">NIT 900.123.456-7 · Kennedy</div><div class="meta">Responsable: Coordinación de voluntariado</div>
+   <div style="margin-top:8px"><span class="chip on">RUT</span><span class="chip on">Cámara de comercio</span><span class="chip on">Política de datos</span></div></div>
+  <div class="card"><b style="font-size:14px">Lista de verificación</b><div class="meta">Organización legítima y activa</div><div class="meta">Propósito social de las actividades</div><div class="meta">Condiciones de seguridad para voluntarios</div><div class="meta">Cumplimiento de protección de datos</div></div>
+  <div><label>Observaciones</label><div class="field" style="min-height:60px">Documentos completos y vigentes.</div></div>
+  <button class="btn">Aprobar fundación</button>
+  <button class="btn sec">Rechazar con motivo</button>
+ </div>
+</section>
+
+<section class="screen" id="s9" aria-label="Aprobar horas">
+ <div class="top"><h1>Aprobar horas</h1><p>Fundación Semillas · 2 registros pendientes</p></div>
+ <div class="body">
+  <div class="card"><h2>Laura Gómez · 4 h</h2><div class="meta">Refuerzo escolar · 14 nov</div><div class="meta">Registrado por la coordinación</div><div style="display:flex;gap:10px;margin-top:10px"><button class="btn" style="min-height:44px;font-size:14px">Aprobar</button><button class="btn sec" style="min-height:44px;font-size:14px">Rechazar</button></div></div>
+  <div class="card"><h2>Andrés Rojas · 3 h</h2><div class="meta">Refuerzo escolar · 14 nov</div><div class="meta">Llegó una hora tarde</div><div style="display:flex;gap:10px;margin-top:10px"><button class="btn" style="min-height:44px;font-size:14px">Aprobar</button><button class="btn sec" style="min-height:44px;font-size:14px">Rechazar</button></div></div>
+  <p class="note">Al aprobar, las horas se suman al historial del estudiante y quedan disponibles para el certificado. Cada decisión queda en la bitácora.</p>
+ </div>
+</section>
+
 </div>
 <script>
 document.querySelectorAll('[data-go]').forEach(function(el){
